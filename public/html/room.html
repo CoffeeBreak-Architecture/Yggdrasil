@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="/room/static/css/style.css">
+        <title>Room Client</title>
+    </head>
+    <body class="body" onload="onLoad()">
+        <div id="leftside">
+            <div id="memberlist">
+
+            </div>
+        </div>
+        <div id="middle">
+            <div id="streamlist">
+            </div>
+            <canvas id="virtualroom" width="1024" height="1024">
+                
+            </canvas>
+            <div id="middlebutton">
+                <input id="messageinput", type="text">
+                <button id="sendmessage" onclick="sendChatMessage()">Send!</button>
+            </div>
+        </div>
+        <div id="rightside">
+            <div id = "chatbox">
+            
+            </div>
+        </div>
+    </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    
+    <script src="/room/static/scripts/common.js"></script>
+    <script src="/room/static//scripts/room.js"></script>
+    <script src="/room/static//scripts/canvas.js"></script>
+    <script src="/room/static//scripts/streams-p2p.js"></script>
+    <script src="/room/static//scripts/stream-players.js"></script>
+</html>

@@ -1,0 +1,92 @@
+
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+.body {
+    background-color: #5D5C61;
+}
+
+#rightside {
+    width:15vw;
+    height:100vh;
+    float: right;
+    border-left:black;
+    border-radius: 1px;
+    background-color: #7395AE;
+}
+
+#streamlist { /* idk lol */
+    width:0%;
+    height:0%;
+}
+
+video {
+    width:0%;
+    height:0%;
+}
+
+#middle {
+    width:68.8vw;
+    height:100vh;
+    float: left;
+}
+
+#leftside {
+    width:15vw;
+    height:100vh;
+    float: left;
+    background-color: #7395AE;
+}
+
+#memberlist {
+    width:90%;
+    height:99%;
+    padding:2%;
+}
+
+#chatbox {
+    width:90%;
+    height:99%;
+    padding:2%;
+    font-size: medium;
+    overflow:auto
+}
+
+#middlebutton {
+    width:100%;
+    height:4%;
+    float: left;
+}
+
+#virtualroom {
+    width: 100%;
+    height: 95%;
+    background-color: #B1A296;
+    border-style: solid;
+}
+
+#nickinput {
+    font-size:medium;
+    font-weight:bolder;
+    width:10%;
+    height:100%;
+    float:left;
+}
+
+#messageinput {
+    width: 79%;
+    height:100%;
+    font-size:medium;
+}
+
+#sendmessage {
+    background-color: #4CAF50;
+    font-size:medium;
+    font-weight: bolder;
+    color:white;
+    border: none;
+    width: 20%;
+    height: 100%;
+}

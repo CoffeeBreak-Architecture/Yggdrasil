@@ -1,0 +1,20 @@
+{
+  "name": "yggdrasil",
+  "version": "1.0.0",
+  "description": "Backend for coffeebreak.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Lomzieboi",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "socket.io": "^4.0.1",
+    "socket.io-client": "^4.1.0",
+    "socket.io-p2p": "^2.2.0"
+  }
+}
