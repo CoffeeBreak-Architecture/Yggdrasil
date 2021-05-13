@@ -20,7 +20,7 @@ app.use(express.json())
 app.use(cors())
 
 const roomManagerUrl = process.env.ROOM_MANAGER_URL
-
+const socketUrl = process.env.SOCKET_URL
 app.get("/", (req, res) => {
     res.send("");
 })
@@ -28,7 +28,7 @@ app.get("/", (req, res) => {
 router.get('/', async (req, res) => {
     try {
         console.log('Creating new room..')
-        let room = (await axios.post(roomManagerUrl + '/rooms')).data
+        let room = (await axios.post(roomManagerUrl + '/rooms', {socketUrl: socketUrl, signallingUrl: socketUrl})).data
         console.log(room.id)
         res.redirect('/room/' + room.id)
     }catch (error) {
