@@ -50,7 +50,7 @@ function addStreamToDocument(userId, stream) {
 }
 
 function addVideoStreamToDocument(userId, stream) {
-
+    makeStreamElement(userId)
     let video = document.createElement('video')
     video.srcObject = stream
     video.play()
@@ -62,7 +62,7 @@ function addVideoStreamToDocument(userId, stream) {
 }
 
 function addAudioStreamToDocument(userId, audioStream) {
-    
+    makeStreamElement(userId)
     let gainNode = audioCtx.createGain()
     let sourceNode = audioCtx.createMediaStreamSource(audioStream)
 

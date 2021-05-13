@@ -45,6 +45,7 @@ roomio.on('onLoggedIn', members => {
 roomio.on("onUserConnected", function(user) {
     addUser(user);
     drawMemberList();
+    
 });
 
 roomio.on('onUserDisconnected', userId => {
@@ -71,7 +72,6 @@ roomio.on("onUserChangedName", function(change) {
 roomio.on('nearby', async data => {
     nearby = data.nearby
     threshold = data.threshold
-    console.log("test")
     await callNearby(data.nearby)
 })
 

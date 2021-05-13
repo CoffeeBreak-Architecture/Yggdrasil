@@ -29,7 +29,6 @@ router.get('/', async (req, res) => {
     try {
         console.log('Creating new room..')
         let room = (await axios.post(roomManagerUrl + '/rooms', {socketUrl: socketUrl, signallingUrl: socketUrl})).data
-        console.log(room.id)
         res.redirect('/room/' + room.id)
     }catch (error) {
         res.status(500).send(error)
