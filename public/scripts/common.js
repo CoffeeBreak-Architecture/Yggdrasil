@@ -6,12 +6,10 @@ function onLoad ()
         }
     });
 
-    connectedUsers = [];
     localUserId = getCookie("playerId");
 
     canvas = document.getElementById("virtualroom");
     ctx = canvas.getContext("2d");
-    messages = [];
 
     initCanvas();
     renderCanvas();

@@ -20,6 +20,7 @@ app.use(cookieParser());
 app.use(express.json())
 app.use(cors())
 
+const testing = process.env.TESTING == 'true'
 
 app.get("/", (req, res) => {
     res.send("");
@@ -46,7 +47,7 @@ router.get("/:roomId", async (req,res) => {
         res.cookie('socketUrl', roomInfo.socketUrl);
         res.cookie('signallingUrl', roomInfo.signallingUrl);
         
-        res.sendFile(__dirname + "/public/html/room.html")
+        res.sendFile(__dirname + getRoomHttpPath(testing))
     } catch (error) {
         res.status(404).send('Room not found.')
         console.log(error)
@@ -56,3 +57,11 @@ router.get("/:roomId", async (req,res) => {
 http.listen("3000", () => {
     console.log("Yggdrasil is up!")
 })
+
+function getRoomHttpPath (testFile) {
+    if (testFile) {
+        return '/public/client_test/TestRunner.html'
+    }else{
+        return '/public/html/room.html'
+    }
+}

@@ -9,8 +9,4 @@ module.exports = {
     getRoom: async function (roomId) {
         return (await axios.get(roomManagerUrl + '/rooms/' + roomId)).data
     },
-
-    deleteRoom: async function(roomId) {
-        return await axios.delete(roomManagerUrl + '/rooms/' + roomId)
-    }
 }

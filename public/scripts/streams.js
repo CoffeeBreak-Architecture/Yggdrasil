@@ -32,3 +32,6 @@ function getWebcamStream () {
 function getMicrophoneStream () {
 
 }
+
+// THIS FILE IS NOT IN USE.
+// PLEASE DON'T JUDGE IT'S AWFULNESS

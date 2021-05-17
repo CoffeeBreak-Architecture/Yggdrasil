@@ -8,8 +8,8 @@ var roomServerUrl = getCookie("socketUrl");
 var canvas;
 var ctx;
 
-var connectedUsers;
-var messages;
+var connectedUsers = [];
+var messages = []
 
 var nearby = []
 var threshold = 512
@@ -62,9 +62,9 @@ roomio.on("onChatMessage", function(message) {
     drawChatBox();
 })
 
-roomio.on("onUserChangedName", function(change) {
+roomio.on("onNameChanged", function(change) {
     let user = getUserById(change.id);
-    user.name = change.name;
+    user.nickname = change.name;
     drawMemberList();
 })
 
@@ -128,11 +128,14 @@ function sendChatMessage () {
     let input = document.getElementById("messageinput");
 
     if (input.value != "") {
-        let message = { author: getLocalUser().nickname, content: input.value };
+        transmitChatMessage(getLocalUser.nickname, input.value)
         input.value = "";
-
-        roomio.emit("onChatMessage", message);
     }
+}
+
+function transmitChatMessage(author, content) {
+    let message = { author: author, content: content };
+    roomio.emit("onChatMessage", message);
 }
 
 // ---- VIRTUAL ROOM ----

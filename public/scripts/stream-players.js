@@ -92,7 +92,7 @@ function removeStreamFromDocument(userId) {
     delete streams[userId]
 }
 
-// Splits one MediaStream with audio and video into two streams with it's constitute parts
+// Splits one MediaStream with audio and video into two streams with it's constitute parts. Obsolete, no longer used.
 function splitSimpleStream(stream) {
     let audioStream = undefined
     let videoStream = undefined
@@ -120,9 +120,9 @@ function resetAllGains() {
 }
 
 function resetGain (targetId) {
-    let stream = streams[x.id]
+    let stream = streams[targetId]
     if (stream != undefined) {
-        setGain(x.id, computeGain(x.id))
+        setGain(targetId, computeGain(targetId))
     }
 }
 

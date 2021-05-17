@@ -13,7 +13,8 @@
             ],
             "program": "${workspaceFolder}\\index.js",
             "env": {
-                "ROOM_MANAGER_URL": "http://localhost:3020"
+                "ROOM_MANAGER_URL": "http://localhost:3020",
+                "TESTING": "true",
             }
         }
     ]
