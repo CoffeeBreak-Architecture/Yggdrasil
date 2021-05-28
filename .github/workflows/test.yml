@@ -62,9 +62,9 @@ jobs:
        
       - name: Start services
         run: | 
-          node huginn/index.js
-          node odin/index.js
-          node yggdrasil/index.js
+          node huginn/index.js &
+          node odin/index.js &
+          node yggdrasil/index.js &
           
       - run: |
           cd yggdrasil
