@@ -28,6 +28,8 @@ jobs:
     
       - name: Fetch Yggdrasil
         uses: actions/checkout@v2
+        with: 
+          path: 'yggdrasil'
         
       - name: Setup Node
         uses: actions/setup-node@v2
@@ -46,11 +48,24 @@ jobs:
           repository: 'coffeebreak-architecture/huginn'
           path: 'huginn'
        
+      - name: npm ci
+        run: |
+          cd huginn
+          npm ci
+          cd ..
+          cd odin
+          npm ci
+          cd ..
+          cd yggdrasil
+          npm ci
+          cd ..
+       
       - name: Start services
         run: | 
           node huginn/index.js
           node odin/index.js
-          node index.js
-    
-      - run: npm ci
-      - run: npm test
+          node yggdrasil/index.js
+          
+      - run: |
+          cd yggdrasil
+          npm test
