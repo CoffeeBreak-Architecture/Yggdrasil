@@ -1,4 +1,7 @@
-const signalling = io(getCookie('signallingUrl') + '/signalling')
+const signalling = io(getCookie('signallingUrl') + '/signalling', {
+    reconnection: true,
+    reconnectionDelay: 500
+})
 const configuration = { 'iceServers': [{ 'urls': 'stun:stun.l.google.com:19302' }] }
 
 const peerConnections = {}

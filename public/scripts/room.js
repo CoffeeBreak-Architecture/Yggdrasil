@@ -15,7 +15,10 @@ var nearby = []
 var threshold = 512
 var room;
 
-roomio = io(roomServerUrl + "/rooms")
+roomio = io(roomServerUrl + "/rooms", {
+    reconnection: true,
+    reconnectionDelay: 500
+})
 
 function addUser (user) {
     connectedUsers.push(user);
@@ -27,7 +30,8 @@ function removeUser (userId) {
 
 roomio.on('connect', () => {
     let nickname = prompt("What's your name, sailor?")
-    roomio.emit('login', nickname, getCookie('roomId'))
+    let nicknameAmalgamation = nickname + ":" + getCookie('roomId')
+    roomio.emit('login', nicknameAmalgamation)
 })
 
 roomio.on('onLoggedIn', members => {
