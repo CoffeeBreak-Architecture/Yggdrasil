@@ -10,6 +10,7 @@ function renderCanvas () {
     requestAnimationFrame(renderCanvas)
 }
 
+
 function renderPerson (id, x, y, name, color) {
     ctx.font = "16px Arial";
     ctx.strokeText(name, x - ctx.measureText(name).width / 2, y + 50);

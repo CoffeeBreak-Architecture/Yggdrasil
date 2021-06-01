@@ -25,7 +25,7 @@ const testing = process.env.TESTING == 'true'
 app.get("/", (req, res) => {
     res.send("");
 })
-
+//Creates a random room and redirects to that room url
 router.get('/', async (req, res) => {
     try {
         console.log('Creating new room..')
@@ -37,6 +37,7 @@ router.get('/', async (req, res) => {
     }
 })
 
+//Connects to said room url
 router.get("/:roomId", async (req,res) => {
 
     let roomId = req.params.roomId
