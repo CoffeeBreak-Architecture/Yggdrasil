@@ -27,7 +27,8 @@ function removeUser (userId) {
 
 roomio.on('connect', () => {
     let nickname = prompt("What's your name, sailor?")
-    roomio.emit('login', nickname, getCookie('roomId'))
+    let nicknameAmalgamation = nickname + ":" + getCookie('roomId')
+    roomio.emit('login', nicknameAmalgamation)
 })
 
 roomio.on('onLoggedIn', members => {
