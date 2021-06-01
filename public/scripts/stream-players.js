@@ -16,6 +16,7 @@ async function getLocalStream() {
 
     return new Promise((resolve, reject) => {
         navigator.mediaDevices.getUserMedia(videoConstraints).then(stream => {
+            //splits the media into audio and video tracks
             makeStreamElement(localUserId)
             audioStream = new MediaStream(stream.getAudioTracks());
             videoStream = new MediaStream(stream.getVideoTracks());
@@ -48,7 +49,6 @@ function addStreamToDocument(userId, stream) {
     addVideoStreamToDocument(userId, stream)
     addAudioStreamToDocument(userId, stream)
 }
-
 function addVideoStreamToDocument(userId, stream) {
 
     let video = document.createElement('video')
@@ -63,6 +63,8 @@ function addVideoStreamToDocument(userId, stream) {
 
 function addAudioStreamToDocument(userId, audioStream) {
     
+    //Sets up an audio context for the audio stream
+    //This is done to create a gainNode in order to adjust volume
     let gainNode = audioCtx.createGain()
     let sourceNode = audioCtx.createMediaStreamSource(audioStream)
 

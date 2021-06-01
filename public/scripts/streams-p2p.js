@@ -4,10 +4,9 @@ const signalling = io(getCookie('signallingUrl') + '/signalling', {
 })
 const configuration = { 'iceServers': [{ 'urls': 'stun:stun.l.google.com:19302' }] }
 
+//All connected users in the room
 const peerConnections = {}
-//Peer connection
-//Just for testing, absolutely not the correct solution
-
+//Checks all users in a room. If nearby start call
 async function callNearby(nearby) {
     for (const pc in peerConnections) {
         const target = peerConnections[pc].target
@@ -30,6 +29,7 @@ async function callNearby(nearby) {
     await (Promise.all(promises))
 }
 
+//Initializes the WebRTC connection
 async function makeCall(clientId) {
     console.log('Calling ' + clientId)
     if(peerConnections[clientId] == undefined) {
@@ -42,10 +42,12 @@ async function makeCall(clientId) {
     })
 }
 
+
 document.addEventListener('onLoggedIn', () => {
     signalling.emit('login', localUserId)
 })
 
+//Handles signalling
 signalling.on('message', async function (message) {
     //console.log('Client received message:', message);
     if (message.message.type === 'offer') {
@@ -75,14 +77,15 @@ function sendMessage(message, target) {
     signalling.emit('message', { to: target, from: localUserId, message: message })
 }
 
+//Sets up the peer connection
 async function createPeerConnection(targetID) {
     try {
         peerConnections[targetID] = { pc: new RTCPeerConnection(configuration), target: targetID }
-
         peerConnections[targetID].pc.onicecandidate = event => handleIceCandidate(event, targetID);
         peerConnections[targetID].pc.onaddstream = event => handleRemoteStreamAdded(event, targetID);
         peerConnections[targetID].pc.onremovestream = handleRemoteStreamRemoved;
         peerConnections[targetID].pc.onconnectionstatechange = event => stateChangeHandler(event, targetID)
+        //Gets the local stream from the stream-players.js script
         peerConnections[targetID].pc.addStream(await getLocalStream())
         console.log('Created RTCPeerConnnection');
     } catch (e) {
@@ -92,8 +95,9 @@ async function createPeerConnection(targetID) {
     }
 }
 
+//When a ICE candidate is recieved pc.onicecandidate event listener fires this function. Sends the
+//received candiate to all other users in the room.
 function handleIceCandidate(event, targetID) {
-    //console.log('icecandidate event: ', event);
     if (event.candidate) {
         sendMessage({
             type: 'candidate',
@@ -108,11 +112,9 @@ function handleIceCandidate(event, targetID) {
 }
 
 function handleRemoteStreamAdded(event, targetID) {
-    //console.log('Remote stream added.');
     remoteStream = event.stream;
-    //console.log("START OF REMOTE STREAM EVENT")
     console.log(event)
-    //console.log("END OF EVENT")
+    //Adds the stream to the browser window, from stream-players.js script
     addStreamToDocument(targetID, remoteStream)
 }
 
