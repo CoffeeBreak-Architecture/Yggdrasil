@@ -132,7 +132,7 @@ function sendChatMessage () {
     let input = document.getElementById("messageinput");
 
     if (input.value != "") {
-        transmitChatMessage(getLocalUser.nickname, input.value)
+        transmitChatMessage(getLocalUser().nickname, input.value)
         input.value = "";
     }
 }
