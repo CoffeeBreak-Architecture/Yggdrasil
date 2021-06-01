@@ -30,6 +30,7 @@ router.get('/', async (req, res) => {
     try {
         console.log('Creating new room..')
         let room = await manager.createRoom()
+        console.log('Room created..')
         res.redirect('/room/' + room.id)
     }catch (error) {
         res.status(500).send(error)
@@ -47,6 +48,7 @@ router.get("/:roomId", async (req,res) => {
         res.cookie('socketUrl', roomInfo.socketUrl);
         res.cookie('signallingUrl', roomInfo.signallingUrl);
         
+        console.log('Connecting client to room..')
         res.sendFile(__dirname + getRoomHttpPath(testing))
     } catch (error) {
         res.status(404).send('Room not found.')

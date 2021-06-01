@@ -22,15 +22,15 @@ describe('Client integration testing', function () {
             expect(localUserId).to.exist
         })
 
+        it ('Prompts nickname', async function () {
+            expect(getLocalUser().nickname).to.equal('John Doe')
+        })
+
         it ('moveLocalUser (x, y)', async function () {
             moveLocalUser(300, 300)
             await delayUntill(() => getLocalUser().x == 300)
             expect(getLocalUser().x).to.equal(300)
             expect(getLocalUser().y).to.equal(300)
-        })
-
-        it ('Recieves nearby', function () {
-            expect(nearby).to.exist
         })
 
         it ('transmitChatMessage(author, content)', async function () {
@@ -45,6 +45,20 @@ describe('Client integration testing', function () {
             modifyLocalUserName ('Jane Doe')
             await delayUntill(() => getLocalUser().nickname != 'John Doe')
             expect(getLocalUser().nickname).to.equal('Jane Doe')
+        })
+    })
+
+    describe("streams-p2p.js", function () {
+        it ('sendMessage(...)', async function () {
+            await delay(1000)
+            let response;
+            signalling.on('message', message => {
+                response = message;
+            })
+            sendMessage({ type: 'type', contents: 'contents' }, localUserId)
+            await delayUntill(() => response)
+            expect(response.message.type).to.equal('type')
+            expect(response.message.contents).to.equal('contents')
         })
     })
 

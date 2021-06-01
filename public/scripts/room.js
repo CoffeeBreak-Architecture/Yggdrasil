@@ -132,7 +132,7 @@ function sendChatMessage () {
     let input = document.getElementById("messageinput");
 
     if (input.value != "") {
-        transmitChatMessage(getLocalUser.nickname, input.value)
+        transmitChatMessage(getLocalUser().nickname, input.value)
         input.value = "";
     }
 }
@@ -141,29 +141,6 @@ function transmitChatMessage(author, content) {
     let message = { author: author, content: content };
     roomio.emit("onChatMessage", message);
 }
-
-// ---- VIRTUAL ROOM ----
-function onCanvasClick (e) {
-    let canvasRect = canvas.getBoundingClientRect();
-
-    let clientWidth = $(window).width()
-    let clientHeight = $(window).height();
-
-    let canvasWidth = canvasRect.right - canvasRect.left;
-    let canvasHeight = canvasRect.bottom - canvasRect.top;
-
-    let xFactor = clientWidth / canvasWidth;
-    let yFactor = clientHeight / canvasHeight; 
-
-    var canvasX = Math.round((e.clientX - canvasRect.left) * xFactor);
-    var canvasY = Math.round((e.clientY - canvasRect.top) * yFactor);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);  // (0,0) the top left of the canvas
-
-    moveLocalUser(canvasX, canvasY);
-    renderCanvas();
-    unmuteAll()
-}
-
 
 function moveLocalUser (x, y) {
     roomio.emit("onMovePlayer", {x: x, y: y});
