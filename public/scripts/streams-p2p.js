@@ -5,8 +5,6 @@ var config = {
 };
 let mediaSender = new RTCPeerConnection(config)
 const peerConnections = {}
-//Peer connection
-//Just for testing, absolutely not the correct solution
 
 async function callNearby(nearby) {
     for (const pc in peerConnections) {
@@ -116,10 +114,6 @@ function sendMessage(message, target) {
     signalling.emit('message', { to: target, from: localUserId, message: message })
 }
 
-// function sendMessage(message, target) {
-//     //console.log('Client sending message: ', message);
-//     signalling.emit('message', { to: target, from: localUserId, message: message })
-// }
 
 async function createListenerPeerConnection(targetID) {
     try {
@@ -151,21 +145,6 @@ async function createListenerPeerConnection(targetID) {
     }
 }
 
-// function handleIceCandidate(event, targetID) {
-//     //console.log('icecandidate event: ', event);
-//     if (event.candidate) {
-//         sendMessage({
-//             type: 'candidate',
-//             label: event.candidate.sdpMLineIndex,
-//             id: event.candidate.sdpMid,
-//             candidate: event.candidate.candidate
-//         }, targetID);
-
-//     } else {
-//         console.log('End of candidates.');
-//     }
-// }
-
 function handleRemoteTrackAdded(event, targetID) {
     //console.log("START OF REMOTE STREAM EVENT")
     console.log(event)
@@ -182,22 +161,6 @@ function handleRemoteTrackAdded(event, targetID) {
 function handleRemoteStreamRemoved(event) {
     console.log('Remote stream removed. Event: ', event);
 }
-
-// //Function to set description of local media
-// function setLocalAndSendMessage(sessionDescription, target) {
-//     peerConnections[target].pc.setLocalDescription(sessionDescription);
-//     console.log('setLocalAndSendMessage sending message', sessionDescription);
-//     sendMessage(sessionDescription, target);
-// }
-
-// function answerCall(target) {
-//     console.log('Sending answer to peer.');
-//     peerConnections[target].pc.createAnswer().then((sessionDescription) => {
-//         setLocalAndSendMessage(sessionDescription, target)
-//     }, (error) => {
-//         console.error(error)
-//     });
-// }
 
 function closeCallConnection(target) {
     console.log('Closing call with ' + target)
